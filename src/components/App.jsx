@@ -1,15 +1,23 @@
-import ContactForm from './ContactForm/ContactForm';
-import ContactList from './ContactList/ContactList';
-import Filter from './Filter/Filter';
+import { Routes, Route } from 'react-router-dom';
+
+import Container from './Container/Container';
+import AppBar from './AppBar/AppBar';
+import Contacts from 'Pages/ContactsPage';
+import Home from 'Pages/HomePage';
+import Login from 'Pages/LoginPage';
+import Register from 'Pages/RegisterPage';
 
 export function App() {
     return (
-        <main className="wrapper">
-            <h1 className="title">Phonebook</h1>
-            <ContactForm />
-            <h2 className="title">Contacts</h2>
-            <Filter />
-            <ContactList />
-        </main>
+        <Container>
+            <AppBar />
+
+            <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/contacts" element={<Contacts />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
+        </Container>
     );
 }

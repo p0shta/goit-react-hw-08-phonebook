@@ -1,4 +1,4 @@
-import { useDeleteContactMutation } from '../../redux/contactsApi';
+import { useDeleteContactMutation } from '../../redux/contacts/contactsApi';
 import PropTypes from 'prop-types';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
