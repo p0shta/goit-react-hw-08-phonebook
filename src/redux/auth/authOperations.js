@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-// import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -41,26 +40,19 @@ export const logout = createAsyncThunk('auth/logout', async () => {
         return 'Something went wrong. Please try again.';
     }
 });
-//-------------------------------
-// export const authApi = createApi({
-//     reducerPath: 'authApi',
-//     baseQuery: fetchBaseQuery({
-//         baseUrl: 'https://connections-api.herokuapp.com',
-//     }),
-//     endpoints: builder => ({
-//         register: builder.mutation({
-//             query: user => ({
-//                 url: `/users/signup`,
-//                 method: 'POST',
-//                 body: user,
-//             }),
-//         }),
-//         login: builder.mutation({
-//             query: user => ({
-//                 url: `/users/login`,
-//                 method: 'POST',
-//                 body: user,
-//             }),
-//         }),
-//     }),
-// });
+
+export const refreshCurrentUser = createAsyncThunk('auth/refresh', async (_, thunkApi) => {
+    const state = thunkApi.getState();
+    const oldToken = state.auth.token;
+
+    if (oldToken === null) return thunkApi.rejectWithValue();
+
+    token.set(oldToken);
+
+    try {
+        const response = await axios.get('/users/current');
+        return response.data;
+    } catch (error) {
+        return 'Something went wrong. Please try again.';
+    }
+});
