@@ -4,6 +4,7 @@ import ContactListItem from 'components/ContactListItem/ContactListItem';
 
 export default function ContactList() {
     const filter = useSelector(state => state.filter);
+
     const { data: contacts, isLoading } = useGetContactsQuery();
     const filteredContacts = contacts?.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()));
 
