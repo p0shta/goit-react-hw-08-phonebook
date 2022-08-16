@@ -2,10 +2,9 @@
 
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
-        'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #333533;
 }
 
 code {
@@ -61,12 +60,7 @@ select {
     font: inherit;
 }
 
-/* .wrapper {
-    width: 500px;
-    margin: 0 auto;
-} */
-
 .title {
-    font-size: 30px;
+    text-transform: uppercase;
     margin-bottom: 20px;
 }

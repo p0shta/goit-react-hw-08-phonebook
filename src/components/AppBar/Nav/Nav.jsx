@@ -10,7 +10,10 @@ export default function Nav() {
         <nav>
             <ul className={s.nav}>
                 <li>
-                    <NavLink to="/" className={({ isActive }) => (isActive ? s.linkActive : s.link)}>
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+                    >
                         Home
                     </NavLink>
                 </li>

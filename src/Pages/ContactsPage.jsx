@@ -1,12 +1,13 @@
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
-import Filter from '../components/Filter/Filter';
+
+import s from './ContactsPage.module.scss';
 
 export default function Contacts() {
     return (
-        <main className="wrapper">
+        <main className={s.page}>
+            {/* <h1 className="title">Phonebook</h1> */}
             <ContactForm />
-            <Filter />
             <ContactList />
         </main>
     );

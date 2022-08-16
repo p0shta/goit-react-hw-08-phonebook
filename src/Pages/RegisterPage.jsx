@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { register } from '../redux/auth/authOperations';
+import { useSelector } from 'react-redux';
+import { getIsLoggedIn } from '../redux/auth/authSelectors';
+
+import Greeting from 'components/Greeting/Greeting';
+import s from './RegisterPage.module.scss';
 
 export default function Register() {
+    const isLoggedIn = useSelector(getIsLoggedIn);
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -40,15 +47,28 @@ export default function Register() {
     };
 
     return (
-        <main onSubmit={handleSubmit}>
-            <form>
-                <label htmlFor="name">
+        <main className={s.page}>
+            {isLoggedIn && <Navigate to="/contacts" replace={true} />}
+
+            <Greeting />
+
+            <form onSubmit={handleSubmit} className={s.form}>
+                <label htmlFor="name" className={s.formRow}>
                     Name
-                    <input type="text" value={name} onChange={handleChange} name="name" id="name" required />
+                    <input
+                        className={s.input}
+                        type="text"
+                        value={name}
+                        onChange={handleChange}
+                        name="name"
+                        id="name"
+                        required
+                    />
                 </label>
-                <label htmlFor="email">
+                <label htmlFor="email" className={s.formRow}>
                     Email
                     <input
+                        className={s.input}
                         type="text"
                         value={email}
                         onChange={handleChange}
@@ -57,9 +77,10 @@ export default function Register() {
                         required
                     />
                 </label>
-                <label htmlFor="password">
+                <label htmlFor="password" className={s.formRow}>
                     Password
                     <input
+                        className={s.input}
                         type="text"
                         value={password}
                         onChange={handleChange}
@@ -68,7 +89,9 @@ export default function Register() {
                         required
                     />
                 </label>
-                <button type="submit">Create account</button>
+                <button type="submit" className={s.loginBtn}>
+                    Create account
+                </button>
             </form>
         </main>
     );

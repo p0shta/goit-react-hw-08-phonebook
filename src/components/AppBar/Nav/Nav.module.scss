@@ -1,13 +1,26 @@
 .nav {
     display: flex;
+    margin-left: 20px;
 }
 
 .link {
     margin-right: 20px;
-    color: cadetblue;
+    color: #eeeeee;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover {
+        color: #e8eddfd2;
+    }
 }
 
 .linkActive {
-    color: rgb(27, 96, 99);
+    color: #f5cb5c;
+    letter-spacing: 1px;
     margin-right: 20px;
+    text-transform: uppercase;
+    transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    &:hover {
+        color: #f5cc5cd0;
+    }
 }

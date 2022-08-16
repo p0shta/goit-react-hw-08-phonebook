@@ -1,8 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 import { login } from '../redux/auth/authOperations';
+import { useSelector } from 'react-redux';
+import { getIsLoggedIn } from '../redux/auth/authSelectors';
+
+import Greeting from 'components/Greeting/Greeting';
+import s from './LoginPage.module.scss';
 
 export default function Login() {
+    const isLoggedIn = useSelector(getIsLoggedIn);
     const dispatch = useDispatch();
     const [email, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -33,11 +40,16 @@ export default function Login() {
     };
 
     return (
-        <main>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">
+        <main className={s.page}>
+            {isLoggedIn && <Navigate to="/contacts" replace={true} />}
+
+            <Greeting />
+
+            <form onSubmit={handleSubmit} className={s.form}>
+                <label htmlFor="email" className={s.formRow}>
                     Email
                     <input
+                        className={s.input}
                         type="text"
                         id="email"
                         value={email}
@@ -46,9 +58,10 @@ export default function Login() {
                         required
                     />
                 </label>
-                <label htmlFor="password">
+                <label htmlFor="password" className={s.formRow}>
                     Password
                     <input
+                        className={s.input}
                         type="text"
                         id="password"
                         value={password}
@@ -57,7 +70,9 @@ export default function Login() {
                         required
                     />
                 </label>
-                <button type="submit">Log in</button>
+                <button type="submit" className={s.registerBtn}>
+                    Log in
+                </button>
             </form>
         </main>
     );

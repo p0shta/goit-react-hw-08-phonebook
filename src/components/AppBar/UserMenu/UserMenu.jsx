@@ -8,11 +8,13 @@ export default function UserMenu() {
     const username = useSelector(getUserName);
 
     return (
-        <div className={s.userMenu}>
-            <p className={s.greeting}>Hello, {username}!</p>
-            <button className={s.logoutBtn} type="button" onClick={() => dispatch(logout())}>
-                Logout
-            </button>
-        </div>
+        <>
+            <div className={s.userMenu}>
+                <p className={s.greeting}>Hello, {username}!</p>
+                <button className={s.logoutBtn} type="button" onClick={() => dispatch(logout())}>
+                    Logout
+                </button>
+            </div>
+        </>
     );
 }

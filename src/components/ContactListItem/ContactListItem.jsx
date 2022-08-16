@@ -2,7 +2,7 @@ import { useDeleteContactMutation } from '../../redux/contacts/contactsApi';
 import PropTypes from 'prop-types';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import s from './ContactListItem.module.css';
+import s from './ContactListItem.module.scss';
 
 export default function ContactListItem({ contact }) {
     const [deleteContact, { isLoading }] = useDeleteContactMutation();
