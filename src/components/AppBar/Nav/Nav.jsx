@@ -6,27 +6,29 @@ import s from './Nav.module.scss';
 
 export default function Nav() {
     const isLoggedIn = useSelector(getIsLoggedIn);
+
     return (
         <nav>
             <ul className={s.nav}>
-                <li>
-                    <NavLink
-                        to="/"
-                        className={({ isActive }) => (isActive ? s.linkActive : s.link)}
-                    >
-                        Home
-                    </NavLink>
-                </li>
                 {isLoggedIn ? (
                     <li>
                         <NavLink
-                            to="/contacts"
+                            to="contacts"
                             className={({ isActive }) => (isActive ? s.linkActive : s.link)}
                         >
                             Contacts
                         </NavLink>
                     </li>
-                ) : null}
+                ) : (
+                    <li>
+                        <NavLink
+                            to="/"
+                            className={({ isActive }) => (isActive ? s.linkActive : s.link)}
+                        >
+                            Phonebook app
+                        </NavLink>
+                    </li>
+                )}
             </ul>
         </nav>
     );

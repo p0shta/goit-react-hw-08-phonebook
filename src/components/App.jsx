@@ -1,32 +1,69 @@
-import { Routes, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshCurrentUser } from '../redux/auth/authOperations';
 
+import PrivateRoute from './Routes/PrivateRoute';
+import PublicRoute from './Routes/PublicRoute';
 import Container from './Container/Container';
 import AppBar from './AppBar/AppBar';
-import Contacts from 'Pages/ContactsPage';
-import Home from 'Pages/HomePage';
-import Login from 'Pages/LoginPage';
-import Register from 'Pages/RegisterPage';
+import HomePage from 'Pages/HomePage';
+import ContactsPage from 'Pages/ContactsPage';
+import LoginPage from 'Pages/LoginPage';
+import RegisterPage from 'Pages/RegisterPage';
 
 export function App() {
     const dispatch = useDispatch();
+    const isRefreshing = useSelector(state => state.auth.isRefreshingUserData);
+    console.log(isRefreshing);
 
     useEffect(() => {
         dispatch(refreshCurrentUser());
     }, [dispatch]);
 
     return (
-        <Container>
-            <AppBar />
+        !isRefreshing && (
+            <Container>
+                <AppBar />
 
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contacts" element={<Contacts />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-            </Routes>
-        </Container>
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <PublicRoute>
+                                <HomePage />
+                            </PublicRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/contacts"
+                        element={
+                            <PrivateRoute navigateTo="/login">
+                                <ContactsPage />
+                            </PrivateRoute>
+                        }
+                    />
+
+                    <Route
+                        path="/login"
+                        element={
+                            <PublicRoute restricted navigateTo="/contacts">
+                                <LoginPage />
+                            </PublicRoute>
+                        }
+                    />
+                    <Route
+                        path="/register"
+                        element={
+                            <PublicRoute restricted navigateTo="/contacts">
+                                <RegisterPage />
+                            </PublicRoute>
+                        }
+                    />
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </Container>
+        )
     );
 }

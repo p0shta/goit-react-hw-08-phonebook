@@ -1,6 +1,8 @@
 .item {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
+
     padding: 5px 5px 5px 10px;
     border-radius: 10px;
 
@@ -13,9 +15,9 @@
     margin-right: 10px;
 }
 
-.item:not(:last-child) {
-    margin-bottom: 10px;
-}
+// .item:not(:last-child) {
+//     margin-bottom: 10px;
+// }
 
 .decor {
     display: block;

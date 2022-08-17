@@ -10,6 +10,7 @@ import {
     REGISTER,
 } from 'redux-persist';
 import { configureStore } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
 import { filterSlice } from './filter/filterSlice';
 import { contactsApi } from './contacts/contactsApi';
 import { authSlice } from './auth/authSlice';
@@ -28,6 +29,9 @@ export const store = configureStore({
     },
     middleware: getDefaultMiddleware => [
         ...getDefaultMiddleware({
+            thunk: {
+                extraArgument: contactsApi,
+            },
             serializableCheck: {
                 ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
             },
@@ -36,6 +40,6 @@ export const store = configureStore({
     ],
     devTools: process.env.NODE_ENV === 'development',
 });
-// auth: authSlice.reducer,
 
+setupListeners(store.dispatch);
 export const persistor = persistStore(store);

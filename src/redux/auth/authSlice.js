@@ -8,6 +8,7 @@ const initialState = {
     },
     token: null,
     isLoggedIn: false,
+    isRefreshingUserData: false,
     error: null,
 };
 
@@ -36,10 +37,17 @@ export const authSlice = createSlice({
             state.isLoggedIn = false;
             state.error = null;
         },
+        [refreshCurrentUser.pending]: state => {
+            state.isRefreshingUserData = true;
+        },
         [refreshCurrentUser.fulfilled]: (state, action) => {
             state.user = action.payload;
             state.isLoggedIn = true;
+            state.isRefreshingUserData = false;
             state.error = null;
+        },
+        [refreshCurrentUser.rejected]: state => {
+            state.isRefreshingUserData = false;
         },
     },
 });

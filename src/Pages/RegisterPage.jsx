@@ -1,15 +1,11 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Navigate } from 'react-router-dom';
 import { register } from '../redux/auth/authOperations';
-import { useSelector } from 'react-redux';
-import { getIsLoggedIn } from '../redux/auth/authSelectors';
 
 import Greeting from 'components/Greeting/Greeting';
 import s from './RegisterPage.module.scss';
 
 export default function Register() {
-    const isLoggedIn = useSelector(getIsLoggedIn);
     const dispatch = useDispatch();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -48,8 +44,6 @@ export default function Register() {
 
     return (
         <main className={s.page}>
-            {isLoggedIn && <Navigate to="/contacts" replace={true} />}
-
             <Greeting />
 
             <form onSubmit={handleSubmit} className={s.form}>

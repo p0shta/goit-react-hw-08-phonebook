@@ -8,7 +8,7 @@ export default function AuthNav() {
             <ul className={s.nav}>
                 <li>
                     <NavLink
-                        to="/register"
+                        to="register"
                         className={({ isActive }) => (isActive ? s.linkActive : s.link)}
                     >
                         Registration
