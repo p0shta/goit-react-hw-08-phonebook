@@ -1,8 +1,12 @@
 .page {
     display: grid;
     grid-template-columns: 2fr 1.3fr;
-    padding: 70px 0;
-    gap: 60px;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+.form {
+    padding: 205px 30px 0 30px;
 }
 
 .formRow {

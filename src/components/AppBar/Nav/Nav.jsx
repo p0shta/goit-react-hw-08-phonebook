@@ -25,7 +25,7 @@ export default function Nav() {
                             to="/"
                             className={({ isActive }) => (isActive ? s.linkActive : s.link)}
                         >
-                            Phonebook app
+                            Home
                         </NavLink>
                     </li>
                 )}

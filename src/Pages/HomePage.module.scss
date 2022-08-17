@@ -1,6 +1,25 @@
 .page {
     display: grid;
     grid-template-columns: 2fr 1.3fr;
-    padding: 70px 0;
-    gap: 60px;
+    height: 100vh;
+    border: 1px solid black;
+}
+.preview {
+    padding: 200px 10px 0;
+}
+
+.title {
+    margin-bottom: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: #f1504d;
+    font-size: 40px;
+    border: 5px solid rgba(184, 184, 184, 0.404);
+}
+
+.subTitle {
+    text-align: center;
+    color: #333533;
+    font-size: 18px;
+    line-height: 175%;
 }

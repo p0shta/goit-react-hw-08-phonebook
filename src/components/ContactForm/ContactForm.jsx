@@ -1,13 +1,12 @@
 import { useState } from 'react';
-// import { useGetContactsQuery } from '../../redux/contactsApi';
 
-import { useAddContactMutation } from '../../redux/contacts/contactsApi';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { useAddContactMutation, useGetContactsQuery } from '../../redux/contacts/contactsApi';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 import s from './ContactForm.module.scss';
 
 export default function ContactForm() {
-    // const { data: contacts } = useGetContactsQuery();
+    const { data: contacts } = useGetContactsQuery();
     const [addContact] = useAddContactMutation();
     const [name, setName] = useState('');
     const [number, setNumber] = useState('');
@@ -32,17 +31,17 @@ export default function ContactForm() {
     const onSubmit = e => {
         e.preventDefault();
 
-        // const isContactAdded = contacts.find(
-        //     contact => contact.name.toLowerCase() === name.toLowerCase() || contact.number === number
-        // );
-        addContact({ name, number });
+        const isContactAdded = contacts.find(
+            contact =>
+                contact.name.toLowerCase() === name.toLowerCase() || contact.number === number
+        );
 
-        // if (isContactAdded) {
-        //     return Notify.failure('contact has already added');
-        // } else {
-        //     addContact({ name, number });
-        //     Notify.success('contact added');
-        // }
+        if (isContactAdded) {
+            return Notify.failure('contact has already added');
+        } else {
+            addContact({ name, number });
+            Notify.success('contact added');
+        }
 
         resetState();
     };

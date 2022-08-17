@@ -1,6 +1,9 @@
 .page {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    padding: 70px 0;
-    gap: 60px;
+    gap: 30px;
+    height: 100vh;
+    padding: 70px 30px;
+
+    border: 1px solid black;
 }
