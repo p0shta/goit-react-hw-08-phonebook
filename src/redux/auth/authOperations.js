@@ -12,32 +12,32 @@ const token = {
     },
 };
 
-export const register = createAsyncThunk('auth/register', async user => {
+export const register = createAsyncThunk('auth/register', async (user, { rejectWithValue }) => {
     try {
         const response = await axios.post('/users/signup', user);
         token.set(response.data.token);
         return response.data;
     } catch (error) {
-        return 'Something went wrong. Please try again.';
+        return rejectWithValue('Something went wrong. Please try again.');
     }
 });
 
-export const login = createAsyncThunk('auth/login', async user => {
+export const login = createAsyncThunk('auth/login', async (user, { rejectWithValue }) => {
     try {
         const response = await axios.post('/users/login', user);
         token.set(response.data.token);
         return response.data;
     } catch (error) {
-        return 'Something went wrong. Please try again.';
+        return rejectWithValue('Something went wrong. Please try again.');
     }
 });
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async (_, { rejectWithValue }) => {
     try {
         await axios.post('/users/logout');
         token.unset();
     } catch (error) {
-        return 'Something went wrong. Please try again.';
+        return rejectWithValue('Something went wrong. Please try again.');
     }
 });
 

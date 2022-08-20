@@ -1,8 +1,8 @@
 import Greeting from 'components/Greeting/Greeting';
-import Preview from '../images/preview.webp';
+import Preview from '../../images/preview.webp';
 import s from './HomePage.module.scss';
 
-export default function Home() {
+export default function HomePage() {
     return (
         <main className={s.page}>
             <Greeting />

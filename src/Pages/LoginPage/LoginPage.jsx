@@ -1,26 +1,28 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { register } from '../redux/auth/authOperations';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getIsError } from '../../redux/auth/authSelectors';
+import { login } from '../../redux/auth/authOperations';
 
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import Greeting from 'components/Greeting/Greeting';
-import s from './RegisterPage.module.scss';
+import s from './LoginPage.module.scss';
 
-export default function Register() {
+export default function LoginPage() {
     const dispatch = useDispatch();
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
+    const isError = useSelector(getIsError);
+    const [email, setName] = useState('');
     const [password, setPassword] = useState('');
+
+    useEffect(() => {
+        if (isError) Notify.failure('Something went wrong. Please try again.');
+    }, [isError]);
 
     const handleChange = e => {
         const { name, value } = e.target;
 
         switch (name) {
-            case 'name':
-                setName(value);
-                break;
-
             case 'email':
-                setEmail(value);
+                setName(value);
                 break;
 
             case 'password':
@@ -34,12 +36,7 @@ export default function Register() {
 
     const handleSubmit = e => {
         e.preventDefault();
-
-        dispatch(register({ name, email, password }));
-
-        setName('');
-        setEmail('');
-        setPassword('');
+        dispatch(login({ email, password }));
     };
 
     return (
@@ -47,27 +44,15 @@ export default function Register() {
             <Greeting />
 
             <form onSubmit={handleSubmit} className={s.form}>
-                <label htmlFor="name" className={s.formRow}>
-                    Name
-                    <input
-                        className={s.input}
-                        type="text"
-                        value={name}
-                        onChange={handleChange}
-                        name="name"
-                        id="name"
-                        required
-                    />
-                </label>
                 <label htmlFor="email" className={s.formRow}>
                     Email
                     <input
                         className={s.input}
                         type="text"
-                        value={email}
-                        onChange={handleChange}
-                        name="email"
                         id="email"
+                        value={email}
+                        name="email"
+                        onChange={handleChange}
                         required
                     />
                 </label>
@@ -75,16 +60,16 @@ export default function Register() {
                     Password
                     <input
                         className={s.input}
-                        type="text"
-                        value={password}
-                        onChange={handleChange}
-                        name="password"
+                        type="password"
                         id="password"
+                        value={password}
+                        name="password"
+                        onChange={handleChange}
                         required
                     />
                 </label>
-                <button type="submit" className={s.loginBtn}>
-                    Create account
+                <button type="submit" className={s.registerBtn}>
+                    Log in
                 </button>
             </form>
         </main>

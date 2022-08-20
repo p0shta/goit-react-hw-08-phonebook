@@ -16,10 +16,19 @@ export const authSlice = createSlice({
     name: 'auth',
     initialState,
     extraReducers: {
+        [register.pending]: (state, action) => {
+            state.error = null;
+        },
         [register.fulfilled]: (state, action) => {
             state.user = action.payload.user;
             state.token = action.payload.token;
             state.isLoggedIn = true;
+            state.error = null;
+        },
+        [register.rejected]: (state, action) => {
+            state.error = true;
+        },
+        [login.pending]: (state, action) => {
             state.error = null;
         },
         [login.fulfilled]: (state, action) => {
@@ -27,6 +36,9 @@ export const authSlice = createSlice({
             state.token = action.payload.token;
             state.isLoggedIn = true;
             state.error = null;
+        },
+        [login.rejected]: (state, action) => {
+            state.error = true;
         },
         [logout.fulfilled]: (state, action) => {
             state.user = {

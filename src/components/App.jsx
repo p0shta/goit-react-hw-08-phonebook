@@ -7,10 +7,10 @@ import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
 import Container from './Container/Container';
 import AppBar from './AppBar/AppBar';
-import HomePage from '../Pages/HomePage';
-import ContactsPage from '../Pages/ContactsPage';
-import LoginPage from '../Pages/LoginPage';
-import RegisterPage from '../Pages/RegisterPage';
+import HomePage from '../Pages/HomePage/HomePage';
+import ContactsPage from '../Pages/ContactsPage/ContactsPage';
+import LoginPage from '../Pages/LoginPage/LoginPage';
+import RegisterPage from '../Pages/RegisterPage/RegisterPage';
 
 export function App() {
     const dispatch = useDispatch();
