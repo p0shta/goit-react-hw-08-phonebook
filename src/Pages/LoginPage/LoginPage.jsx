@@ -4,6 +4,7 @@ import { getIsError } from '../../redux/auth/authSelectors';
 import { login } from '../../redux/auth/authOperations';
 
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import HideAndShowPassword from 'components/HideAndShowPassword/HideAndShowPassword';
 import Greeting from 'components/Greeting/Greeting';
 import s from './LoginPage.module.scss';
 
@@ -12,6 +13,7 @@ export default function LoginPage() {
     const isError = useSelector(getIsError);
     const [email, setName] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
 
     useEffect(() => {
         if (isError) Notify.failure('Something went wrong. Please try again.');
@@ -56,16 +58,20 @@ export default function LoginPage() {
                         required
                     />
                 </label>
-                <label htmlFor="password" className={s.formRow}>
+                <label htmlFor="password" className={s.formRowRelative}>
                     Password
                     <input
                         className={s.input}
-                        type="password"
+                        type={showPassword ? 'text' : 'password'}
                         id="password"
                         value={password}
                         name="password"
                         onChange={handleChange}
                         required
+                    />
+                    <HideAndShowPassword
+                        showPassword={showPassword}
+                        setShowPassword={setShowPassword}
                     />
                 </label>
                 <button type="submit" className={s.registerBtn}>
