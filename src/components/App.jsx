@@ -1,12 +1,13 @@
+import { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { refreshCurrentUser } from '../redux/auth/authOperations';
 
 import PrivateRoute from './Routes/PrivateRoute';
 import PublicRoute from './Routes/PublicRoute';
 import Container from './Container/Container';
 import AppBar from './AppBar/AppBar';
+
 import HomePage from '../Pages/HomePage/HomePage';
 import ContactsPage from '../Pages/ContactsPage/ContactsPage';
 import LoginPage from '../Pages/LoginPage/LoginPage';
@@ -24,7 +25,6 @@ export function App() {
         !isRefreshing && (
             <Container>
                 <AppBar />
-
                 <Routes>
                     <Route
                         path="/"
